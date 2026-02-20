@@ -1,6 +1,6 @@
-# The Bananaboat Cookbook
+# The BananaBoat Cookbook
 
-The Bananaboat Cookbook is a web-based recipe manager built with `py4web`, `Vue.js`, and a SQL-backed database via `pydal`. It supports account-based recipe creation, shared ingredient management, recipe search, automatic calorie totals, and API-based data access.
+The BananaBoat Cookbook is a web-based recipe manager built with `py4web`, `Vue.js`, and a SQL-backed database via `pydal`. It supports account-based recipe creation, shared ingredient management, recipe search, automatic calorie totals, and API-based data access.
 
 ## Stack
 
@@ -11,11 +11,14 @@ The Bananaboat Cookbook is a web-based recipe manager built with `py4web`, `Vue.
 
 ## Run the App
 
-1. Start in this project directory:
-   - `cd bro`
-2. Run py4web apps:
+1. Start at the project directory
+2. Ensure you have py4web installed & correct environment:
+   - `python -m venv .venv`
+   - `source .venv/bin/activate`
+   - `pip install py4web`
+3. Run py4web apps:
    - `py4web run apps`
-3. Open the app:
+4. Open the app:
    - `http://127.0.0.1:8000/recipe_manager`
 
 ## Core User Features
@@ -39,7 +42,7 @@ The Bananaboat Cookbook is a web-based recipe manager built with `py4web`, `Vue.
 
 ## Database Schema
 
-Defined in `bro/apps/recipe_manager/models.py`:
+Defined in `apps/recipe_manager/models.py`:
 
 - `ingredients`
   - `name`, `unit`, `calories_per_unit`, `description`
@@ -58,7 +61,7 @@ Ingredients with missing calorie values are skipped from the total.
 
 ## TheMealDB Import
 
-Implemented in `bro/apps/recipe_manager/private/populate_recipes.py`.
+Implemented in `apps/recipe_manager/private/populate_recipes.py`.
 
 Import flow:
 
@@ -71,11 +74,11 @@ Import flow:
 
 Quantity parsing strips numeric characters from the measure string and defaults to `1.0` if parsing fails.
 
-Important current behavior: `import_recipes(db)` is called from `models.py` at import time.
+Important current behavior: `import_recipes(db)` is called from `models.py` at import time. This is currently a development convenience; in production it should be triggered explicitly or gated behind an env var.
 
 ## API Endpoints
 
-Routes are defined in `bro/apps/recipe_manager/controllers.py` and served under `/recipe_manager/...`.
+Routes are defined in `apps/recipe_manager/controllers.py` and served under `/recipe_manager/...`.
 
 ### Ingredients
 
